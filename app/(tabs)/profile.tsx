@@ -12,7 +12,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing, SipatRadius, SipatTypography } from '@/constants/theme';
 import { PHILIPPINE_REGIONS, type RegionData } from '@/constants/regions';
 import { useLanguage } from '@/hooks/use-language';
 import { useAuthStore } from '@/store/auth-store';
@@ -341,14 +341,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: 20,
-    paddingTop: 12,
+    paddingHorizontal: SipatSpacing.xl,
+    paddingTop: SipatSpacing.md,
   },
 
   // ── Avatar Section ─────────────────────────────────────
   avatarSection: {
     alignItems: 'center',
-    paddingVertical: 24,
+    paddingVertical: SipatSpacing.xxl,
   },
   avatarCircle: {
     width: 100,
@@ -359,10 +359,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 3,
     borderColor: SipatColors.gold,
-    shadowColor: '#000',
+    shadowColor: SipatColors.gold,
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
+    shadowOpacity: 0.15,
+    shadowRadius: 10,
     elevation: 4,
   },
   displayName: {
@@ -372,9 +372,9 @@ const styles = StyleSheet.create({
     marginTop: 14,
   },
   contactInfo: {
-    fontSize: 14,
+    ...SipatTypography.bodySmall,
     color: SipatColors.textSecondary,
-    marginTop: 4,
+    marginTop: SipatSpacing.xs,
   },
   roleBadge: {
     flexDirection: 'row',
@@ -384,10 +384,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 5,
     backgroundColor: SipatColors.goldPale,
-    borderRadius: 16,
+    borderRadius: SipatRadius.lg,
   },
   roleBadgeText: {
-    fontSize: 13,
+    ...SipatTypography.bodySmall,
     fontWeight: '600',
     color: SipatColors.gold,
   },
@@ -395,14 +395,14 @@ const styles = StyleSheet.create({
   // ── Stats Row ──────────────────────────────────────────
   statsRow: {
     flexDirection: 'row',
-    gap: 10,
-    marginBottom: 24,
+    gap: SipatSpacing.md,
+    marginBottom: SipatSpacing.xxl,
   },
   statCard: {
     flex: 1,
     backgroundColor: SipatColors.cardBg,
-    borderRadius: 12,
-    paddingVertical: 16,
+    borderRadius: SipatRadius.md,
+    paddingVertical: SipatSpacing.lg,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -416,10 +416,10 @@ const styles = StyleSheet.create({
     color: SipatColors.navy,
   },
   statLabel: {
-    fontSize: 11,
+    ...SipatTypography.caption,
     fontWeight: '500',
     color: SipatColors.textMuted,
-    marginTop: 4,
+    marginTop: SipatSpacing.xs,
     textAlign: 'center',
   },
 
@@ -429,12 +429,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: SipatColors.navy,
     marginBottom: 10,
-    paddingLeft: 4,
+    paddingLeft: SipatSpacing.xs,
   },
   settingsCard: {
     backgroundColor: SipatColors.cardBg,
-    borderRadius: 12,
-    paddingVertical: 4,
+    borderRadius: SipatRadius.md,
+    paddingVertical: SipatSpacing.xs,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.06,
@@ -445,18 +445,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 14,
+    paddingHorizontal: SipatSpacing.lg,
+    minHeight: 56,
   },
   settingsItemLeft: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    gap: SipatSpacing.md,
     flex: 1,
   },
   settingsTextContainer: {
     flex: 1,
-    marginRight: 8,
+    marginRight: SipatSpacing.sm,
   },
   settingsIcon: {
     width: 36,
@@ -466,7 +466,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   settingsItemTitle: {
-    fontSize: 15,
+    ...SipatTypography.body,
     fontWeight: '500',
     color: SipatColors.textPrimary,
   },
@@ -486,10 +486,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
-    marginTop: 24,
-    paddingVertical: 14,
-    borderRadius: 12,
+    gap: SipatSpacing.sm,
+    marginTop: SipatSpacing.xxl,
+    height: 48,
+    borderRadius: SipatRadius.md,
     borderWidth: 1.5,
     borderColor: SipatColors.red,
     backgroundColor: SipatColors.cardBg,
@@ -512,8 +512,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
+    paddingHorizontal: SipatSpacing.xl,
+    paddingVertical: SipatSpacing.lg,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: SipatColors.cardBorder,
     backgroundColor: SipatColors.cardBg,
@@ -525,14 +525,14 @@ const styles = StyleSheet.create({
   },
   regionList: {
     flex: 1,
-    paddingHorizontal: 16,
-    paddingTop: 8,
+    paddingHorizontal: SipatSpacing.lg,
+    paddingTop: SipatSpacing.sm,
   },
   regionItem: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
+    paddingHorizontal: SipatSpacing.lg,
     paddingVertical: 14,
     marginVertical: 3,
     borderRadius: 10,
@@ -544,11 +544,11 @@ const styles = StyleSheet.create({
     borderColor: SipatColors.gold + '40',
   },
   regionItemText: {
-    fontSize: 14,
+    ...SipatTypography.body,
     fontWeight: '500',
     color: SipatColors.textPrimary,
     flex: 1,
-    marginRight: 8,
+    marginRight: SipatSpacing.sm,
   },
   regionItemTextSelected: {
     color: SipatColors.navy,

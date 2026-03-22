@@ -48,7 +48,14 @@
       "Bash(cmd /c \"set ANDROID_HOME=C:\\\\Users\\\\USER\\\\AppData\\\\Local\\\\Android\\\\Sdk&& gradlew.bat app:assembleDebug -x lint -x test --configure-on-demand --build-cache -PreactNativeDevServerPort=8081 -PreactNativeArchitectures=x86_64 --info\")",
       "Bash(cmd /c \"set ANDROID_HOME=C:\\\\Users\\\\USER\\\\AppData\\\\Local\\\\Android\\\\Sdk&& gradlew.bat app:assembleDebug -x lint -x test --build-cache -PreactNativeArchitectures=x86_64\")",
       "Bash(cmd /c \"set ANDROID_HOME=C:\\\\Users\\\\USER\\\\AppData\\\\Local\\\\Android\\\\Sdk&& gradlew.bat app:dependencies --configuration debugRuntimeClasspath\")",
-      "Bash(powershell -Command \"Get-Process java -ErrorAction SilentlyContinue | Select-Object Id, CPU, WorkingSet64 | Format-Table\")"
+      "Bash(powershell -Command \"Get-Process java -ErrorAction SilentlyContinue | Select-Object Id, CPU, WorkingSet64 | Format-Table\")",
+      "Bash(rm -f components/hello-wave.tsx components/parallax-scroll-view.tsx components/external-link.tsx components/themed-text.tsx components/themed-view.tsx components/ui/collapsible.tsx components/ui/icon-symbol.tsx components/ui/icon-symbol.ios.tsx components/map/LGUMarker.tsx)",
+      "Bash(rm -f \"app/\\(onboarding\\)/step-1.jsx\" \"app/\\(onboarding\\)/step-2.jsx\" \"app/\\(onboarding\\)/step-3.jsx\")",
+      "Bash(rm -f tailwind.config.js nativewind-env.d.ts global.css)",
+      "Bash(rm -f utils/geo.ts utils/cache.ts utils/validation.ts)",
+      "Bash(ANDROID_HOME=\"C:/Users/USER/AppData/Local/Android/Sdk\" npx expo prebuild --platform android --clean)",
+      "Bash(ANDROID_HOME=\"C:/Users/USER/AppData/Local/Android/Sdk\" PATH=\"$ANDROID_HOME/platform-tools:$PATH\" adb install android/app/build/outputs/apk/debug/app-debug.apk)",
+      "Bash(find /c/JC/SipatGov/backend/tests -type f -not -path */__pycache__/*)"
     ]
   }
 }

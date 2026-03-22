@@ -13,7 +13,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { ProjectCard } from '@/components/projects/ProjectCard';
 import { ProjectFilters, type ProjectFilterValue } from '@/components/projects/ProjectFilters';
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing, SipatRadius, SipatTypography } from '@/constants/theme';
 import { useProjects } from '@/hooks/api';
 import { useLanguage } from '@/hooks/use-language';
 import type { Project } from '@/types/models';
@@ -179,46 +179,45 @@ const styles = StyleSheet.create({
     backgroundColor: SipatColors.dashboardBg,
   },
   pageTitle: {
-    fontSize: 24,
-    fontWeight: '700',
+    ...SipatTypography.h2,
     color: SipatColors.textPrimary,
-    paddingHorizontal: 20,
-    marginTop: 8,
-    marginBottom: 16,
+    paddingHorizontal: SipatSpacing.xl,
+    marginTop: SipatSpacing.sm,
+    marginBottom: SipatSpacing.lg,
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: SipatColors.cardBg,
-    marginHorizontal: 20,
-    marginBottom: 16,
-    borderRadius: 12,
+    marginHorizontal: SipatSpacing.xl,
+    marginBottom: SipatSpacing.lg,
+    borderRadius: SipatRadius.md,
     borderWidth: 1,
     borderColor: SipatColors.cardBorder,
-    paddingHorizontal: 12,
-    height: 44,
+    paddingHorizontal: SipatSpacing.md,
+    height: 48,
   },
   searchIcon: {
-    marginRight: 8,
+    marginRight: SipatSpacing.sm,
   },
   searchInput: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 15,
     color: SipatColors.textPrimary,
     paddingVertical: 0,
   },
   clearIcon: {
-    padding: 4,
+    padding: SipatSpacing.xs,
   },
   listContent: {
-    paddingHorizontal: 20,
+    paddingHorizontal: SipatSpacing.xl,
     paddingBottom: 40,
   },
   listHeader: {
-    marginBottom: 12,
+    marginBottom: SipatSpacing.md,
   },
   projectCount: {
-    fontSize: 14,
+    ...SipatTypography.bodySmall,
     fontWeight: '600',
     color: SipatColors.textSecondary,
   },
@@ -229,16 +228,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
   },
   emptyTitle: {
-    fontSize: 15,
+    ...SipatTypography.body,
     color: SipatColors.textMuted,
     textAlign: 'center',
-    marginTop: 12,
-    lineHeight: 22,
+    marginTop: SipatSpacing.md,
   },
   emptySubtitle: {
-    fontSize: 13,
+    ...SipatTypography.bodySmall,
     color: SipatColors.textMuted,
     textAlign: 'center',
-    marginTop: 8,
+    marginTop: SipatSpacing.sm,
   },
 });

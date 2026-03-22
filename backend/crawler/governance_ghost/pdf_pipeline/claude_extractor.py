@@ -69,6 +69,26 @@ Return a JSON object with:
 - overall_assessment: Brief overall assessment
 
 Include confidence scores. Return ONLY valid JSON.""",
+
+    "promise_extraction": """Extract all specific commitments, pledges, and promises made by \
+government officials from this document (speech transcript, news article, executive order, \
+development plan, or public hearing record).
+
+Return a JSON object with:
+- promises: Array of objects, each with:
+  - official_name: Full name of the government official who made the promise
+  - position: Their title/position (e.g., City Mayor, Governor, Congressman)
+  - promise_text: The exact or closely paraphrased promise/commitment text
+  - target_date: Promised completion date if mentioned (YYYY-MM-DD), or null
+  - budget_mentioned: Budget amount in PHP (number only) if mentioned, or null
+  - category: One of Infrastructure/Health/Education/Social Services/Environment/\
+Public Safety/Economic Development/Housing/Technology/Governance
+  - confidence: Confidence score (0.0-1.0) that this is a genuine verifiable commitment
+
+Only include specific, verifiable commitments — not vague aspirational statements. \
+A promise must have a clear deliverable or measurable outcome.
+
+Include an overall confidence score. Return ONLY valid JSON.""",
 }
 
 
@@ -96,16 +116,24 @@ class ClaudeExtractor:
         """
         if _mock_nlp_enabled():
             from governance_ghost.pdf_pipeline.mock_data import (
+                MOCK_STRUCTURED_AUDIT,
                 MOCK_STRUCTURED_AWARD_NOTICE,
                 MOCK_STRUCTURED_BID_NOTICE,
+                MOCK_STRUCTURED_BUDGET,
+                MOCK_STRUCTURED_PROMISES,
             )
 
             logger.info(
                 "MOCK_NLP: returning canned structured data instead of calling Claude API"
             )
-            if document_type == "award_notice":
-                return MOCK_STRUCTURED_AWARD_NOTICE
-            return MOCK_STRUCTURED_BID_NOTICE
+            mock_dispatch = {
+                "award_notice": MOCK_STRUCTURED_AWARD_NOTICE,
+                "bid_notice": MOCK_STRUCTURED_BID_NOTICE,
+                "budget_document": MOCK_STRUCTURED_BUDGET,
+                "audit_report": MOCK_STRUCTURED_AUDIT,
+                "promise_extraction": MOCK_STRUCTURED_PROMISES,
+            }
+            return mock_dispatch.get(document_type, MOCK_STRUCTURED_BID_NOTICE)
 
         prompt = EXTRACTION_PROMPTS.get(document_type)
         if not prompt:

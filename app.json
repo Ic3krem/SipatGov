@@ -45,21 +45,7 @@
           }
         }
       ],
-      [
-        "expo-location",
-        {
-          "locationAlwaysAndWhenInUsePermission": "Kailangan ng SipatGov ang iyong lokasyon para ipakita ang mga proyekto malapit sa iyo."
-        }
-      ],
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "Pumili ng mga larawan para sa iyong report.",
-          "cameraPermission": "Kumuha ng litrato para sa iyong report."
-        }
-      ],
-      "expo-secure-store",
-      "expo-sqlite"
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true,

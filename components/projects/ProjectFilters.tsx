@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing } from '@/constants/theme';
 import { useLanguage } from '@/hooks/use-language';
 import type { ProjectStatus } from '@/types/models';
 
@@ -58,16 +58,18 @@ export function ProjectFilters({ activeFilter, onFilterChange }: ProjectFiltersP
 const styles = StyleSheet.create({
   scroll: {
     flexGrow: 0,
-    marginBottom: 16,
+    marginBottom: SipatSpacing.lg,
   },
   container: {
-    paddingHorizontal: 20,
-    gap: 8,
+    paddingHorizontal: SipatSpacing.xl,
+    gap: SipatSpacing.sm,
   },
   chip: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 20,
+    height: 36,
+    paddingHorizontal: 14,
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   chipActive: {
     backgroundColor: SipatColors.gold,

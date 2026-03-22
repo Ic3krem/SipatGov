@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Svg, { Circle as SvgCircle } from 'react-native-svg';
 
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing } from '@/constants/theme';
 
 interface StatItem {
   label: string;
@@ -75,12 +75,12 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 16,
-    paddingHorizontal: 12,
+    paddingVertical: SipatSpacing.lg,
+    paddingHorizontal: SipatSpacing.md,
   },
   statItem: {
     alignItems: 'center',
-    gap: 6,
+    gap: SipatSpacing.sm,
   },
   circleContainer: {
     position: 'relative',

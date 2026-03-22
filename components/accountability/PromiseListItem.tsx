@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import { StatusBadge } from './StatusBadge';
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing, SipatRadius } from '@/constants/theme';
 import { formatDate, formatConfidence } from '@/utils/format';
 import type { PromiseItem } from '@/types/models';
 
@@ -40,9 +40,9 @@ export function PromiseListItem({ promise }: PromiseListItemProps) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 16,
-    gap: 8,
+    borderRadius: SipatRadius.md,
+    padding: SipatSpacing.md,
+    gap: SipatSpacing.sm,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    gap: 8,
+    gap: SipatSpacing.sm,
   },
   title: {
     flex: 1,

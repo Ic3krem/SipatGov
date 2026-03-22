@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing, SipatRadius } from '@/constants/theme';
 import { PROJECT_STATUS_LABELS, getProjectStatusColor } from '@/constants/status';
 import { formatPesoCompact, formatDate } from '@/utils/format';
 import { useLanguage } from '@/hooks/use-language';
@@ -72,9 +72,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {/* Budget */}
         {project.approved_budget ? (
           <View style={styles.metaRow}>
-            <MaterialIcons name="account-balance-wallet" size={14} color={SipatColors.textMuted} />
+            <MaterialIcons name="account-balance-wallet" size={14} color={SipatColors.success} />
             <Text style={styles.metaLabel}>{t.projects.budget}:</Text>
-            <Text style={styles.metaValue}>{formatPesoCompact(project.approved_budget)}</Text>
+            <Text style={styles.budgetValue}>{formatPesoCompact(project.approved_budget)}</Text>
           </View>
         ) : null}
 
@@ -110,9 +110,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: SipatColors.cardBg,
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
+    borderRadius: SipatRadius.md,
+    padding: SipatSpacing.lg,
+    marginBottom: SipatSpacing.lg,
     borderWidth: 1,
     borderColor: SipatColors.cardBorder,
     // Subtle shadow
@@ -205,6 +205,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: SipatColors.textSecondary,
     fontWeight: '500',
+    flex: 1,
+  },
+  budgetValue: {
+    fontSize: 13,
+    color: SipatColors.success,
+    fontWeight: '700',
     flex: 1,
   },
 });

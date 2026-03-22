@@ -98,6 +98,38 @@ export const Colors = {
   },
 };
 
+// ── Typography Scale ──────────────────────────────────────
+export const SipatTypography = {
+  h1: { fontSize: 28, fontWeight: '700' as const, lineHeight: 34 },
+  h2: { fontSize: 24, fontWeight: '700' as const, lineHeight: 30 },
+  h3: { fontSize: 20, fontWeight: '600' as const, lineHeight: 26 },
+  body: { fontSize: 15, fontWeight: '400' as const, lineHeight: 22 },
+  bodySmall: { fontSize: 13, fontWeight: '400' as const, lineHeight: 18 },
+  caption: { fontSize: 11, fontWeight: '400' as const, lineHeight: 16 },
+  button: { fontSize: 15, fontWeight: '600' as const, lineHeight: 20 },
+  tabLabel: { fontSize: 11, fontWeight: '500' as const, lineHeight: 14 },
+};
+
+// ── Spacing Scale ─────────────────────────────────────────
+export const SipatSpacing = {
+  xs: 4,
+  sm: 8,
+  md: 12,
+  lg: 16,
+  xl: 20,
+  xxl: 24,
+  section: 32,
+};
+
+// ── Border Radius Scale ───────────────────────────────────
+export const SipatRadius = {
+  sm: 8,
+  md: 12,
+  lg: 16,
+  pill: 28,
+  circle: 9999,
+};
+
 export const Fonts = Platform.select({
   ios: {
     sans: 'system-ui',

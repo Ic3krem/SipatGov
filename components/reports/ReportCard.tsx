@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { ReportTypeChip } from './ReportTypeChip';
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing, SipatRadius } from '@/constants/theme';
 import { REPORT_STATUS_COLORS, REPORT_STATUS_LABELS } from '@/constants/status';
 import { formatRelativeDate } from '@/utils/format';
 import { useLanguage } from '@/hooks/use-language';
@@ -78,9 +78,9 @@ export function ReportCard({ report, onUpvote }: ReportCardProps) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 16,
-    gap: 10,
+    borderRadius: SipatRadius.md,
+    padding: SipatSpacing.lg,
+    gap: SipatSpacing.md,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,

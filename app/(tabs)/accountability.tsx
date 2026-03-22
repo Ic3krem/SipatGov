@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { PromiseListItem } from '@/components/accountability/PromiseListItem';
 import { PromiseSummaryCard } from '@/components/accountability/PromiseSummaryCard';
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing, SipatRadius, SipatTypography } from '@/constants/theme';
 import { usePromises, usePromiseStats } from '@/hooks/api';
 import { useLanguage } from '@/hooks/use-language';
 
@@ -124,27 +124,26 @@ const styles = StyleSheet.create({
     backgroundColor: SipatColors.dashboardBg,
   },
   scrollContent: {
-    padding: 20,
+    padding: SipatSpacing.xl,
     paddingBottom: 40,
   },
   pageTitle: {
-    fontSize: 24,
-    fontWeight: '700',
+    ...SipatTypography.h2,
     color: SipatColors.textPrimary,
-    marginBottom: 20,
+    marginBottom: SipatSpacing.lg,
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: '600',
     color: SipatColors.sectionTitle,
-    marginBottom: 12,
+    marginBottom: SipatSpacing.md,
   },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 24,
-    marginBottom: 12,
+    marginTop: SipatSpacing.xxl,
+    marginBottom: SipatSpacing.md,
   },
   viewAll: {
     fontSize: 14,
@@ -154,13 +153,13 @@ const styles = StyleSheet.create({
   summaryGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
+    gap: SipatSpacing.md,
   },
   summaryCardWrapper: {
     width: '47%',
   },
   promiseList: {
-    gap: 12,
+    gap: SipatSpacing.md,
   },
   centered: {
     flex: 1,
@@ -171,20 +170,19 @@ const styles = StyleSheet.create({
   loadingText: {
     fontSize: 14,
     color: SipatColors.textSecondary,
-    marginTop: 12,
+    marginTop: SipatSpacing.md,
   },
   errorText: {
-    fontSize: 15,
+    ...SipatTypography.body,
     color: SipatColors.textSecondary,
     textAlign: 'center',
-    marginTop: 12,
-    lineHeight: 22,
+    marginTop: SipatSpacing.md,
   },
   retryButton: {
-    marginTop: 20,
-    paddingHorizontal: 24,
+    marginTop: SipatSpacing.xl,
+    paddingHorizontal: SipatSpacing.xxl,
     paddingVertical: 10,
-    borderRadius: 8,
+    borderRadius: SipatRadius.sm,
     backgroundColor: SipatColors.gold,
   },
   retryText: {
@@ -193,7 +191,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   statsLoadingRow: {
-    paddingVertical: 20,
+    paddingVertical: SipatSpacing.xl,
     alignItems: 'center',
   },
 });
