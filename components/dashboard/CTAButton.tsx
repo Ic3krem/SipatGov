@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatRadius, SipatSpacing } from '@/constants/theme';
 
 interface CTAButtonProps {
   text: string;
@@ -18,10 +18,11 @@ export function CTAButton({ text, onPress }: CTAButtonProps) {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: SipatColors.gold,
-    paddingVertical: 16,
-    borderRadius: 12,
-    marginHorizontal: 20,
+    height: 56,
+    borderRadius: SipatRadius.pill,
+    marginHorizontal: SipatSpacing.xl,
     alignItems: 'center',
+    justifyContent: 'center',
     // Gold shadow for that warm glow effect
     shadowColor: SipatColors.gold,
     shadowOffset: { width: 0, height: 4 },
@@ -30,8 +31,8 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   text: {
-    fontSize: 15,
-    fontWeight: '800',
+    fontSize: 16,
+    fontWeight: '700',
     color: SipatColors.navy,
     letterSpacing: 1.5,
     textTransform: 'uppercase',

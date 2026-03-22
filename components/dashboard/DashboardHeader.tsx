@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { format } from 'date-fns';
 
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing } from '@/constants/theme';
 
 export function DashboardHeader() {
   const [now, setNow] = useState(() => new Date());
@@ -28,20 +28,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
+    paddingHorizontal: SipatSpacing.xl,
+    paddingVertical: SipatSpacing.md,
     backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
     borderBottomColor: SipatColors.cardBorder,
   },
   date: {
-    fontSize: 12,
-    fontWeight: '700',
+    fontSize: 13,
+    fontWeight: '600',
     color: SipatColors.navyLight,
     letterSpacing: 1,
+    textTransform: 'uppercase',
   },
   time: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '500',
     color: SipatColors.textSecondary,
   },

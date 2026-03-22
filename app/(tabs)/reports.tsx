@@ -13,7 +13,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { ReportCard } from '@/components/reports/ReportCard';
 import { ReportForm } from '@/components/reports/ReportForm';
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing, SipatRadius, SipatTypography } from '@/constants/theme';
 import { useReports, useCreateReport, useUpvoteReport } from '@/hooks/api';
 import { useLanguage } from '@/hooks/use-language';
 import type { CommunityReport, ReportType } from '@/types/models';
@@ -158,13 +158,6 @@ export default function ReportsScreen() {
             {filteredReports.length} {t.reports.reportCount}
           </Text>
         </View>
-        <Pressable
-          style={styles.fab}
-          onPress={() => setFormVisible(true)}
-          hitSlop={4}
-        >
-          <MaterialIcons name="add" size={22} color="#FFFFFF" />
-        </Pressable>
       </View>
 
       {/* Filter Tabs */}
@@ -209,6 +202,15 @@ export default function ReportsScreen() {
         }
       />
 
+      {/* FAB — bottom-right */}
+      <Pressable
+        style={styles.fab}
+        onPress={() => setFormVisible(true)}
+        hitSlop={4}
+      >
+        <MaterialIcons name="add" size={26} color="#FFFFFF" />
+      </Pressable>
+
       {/* Report Form Modal */}
       <ReportForm
         visible={formVisible}
@@ -228,43 +230,46 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 8,
-    paddingBottom: 12,
+    paddingHorizontal: SipatSpacing.xl,
+    paddingTop: SipatSpacing.sm,
+    paddingBottom: SipatSpacing.md,
   },
   pageTitle: {
-    fontSize: 24,
-    fontWeight: '700',
+    ...SipatTypography.h2,
     color: SipatColors.textPrimary,
   },
   reportCount: {
-    fontSize: 13,
+    ...SipatTypography.bodySmall,
     color: SipatColors.textMuted,
     marginTop: 2,
   },
   fab: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    width: 56,
+    height: 56,
+    borderRadius: SipatRadius.pill,
     backgroundColor: SipatColors.gold,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: SipatColors.gold,
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 4,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.35,
+    shadowRadius: 8,
+    elevation: 6,
+    zIndex: 10,
   },
   filterRow: {
     flexDirection: 'row',
-    paddingHorizontal: 20,
-    gap: 8,
-    marginBottom: 4,
+    paddingHorizontal: SipatSpacing.xl,
+    gap: SipatSpacing.sm,
+    marginBottom: SipatSpacing.sm,
   },
   filterTab: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 20,
+    paddingHorizontal: SipatSpacing.lg,
+    paddingVertical: SipatSpacing.sm,
+    borderRadius: SipatSpacing.xl,
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
     borderColor: SipatColors.cardBorder,
@@ -274,7 +279,7 @@ const styles = StyleSheet.create({
     borderColor: SipatColors.navy,
   },
   filterTabText: {
-    fontSize: 13,
+    ...SipatTypography.bodySmall,
     fontWeight: '500',
     color: SipatColors.textSecondary,
   },
@@ -283,13 +288,13 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   listContent: {
-    padding: 20,
-    paddingTop: 12,
+    padding: SipatSpacing.xl,
+    paddingTop: SipatSpacing.md,
     paddingBottom: 40,
     flexGrow: 1,
   },
   separator: {
-    height: 12,
+    height: SipatSpacing.md,
   },
   emptyState: {
     flex: 1,
@@ -301,13 +306,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: SipatColors.textPrimary,
-    marginTop: 16,
+    marginTop: SipatSpacing.lg,
   },
   emptyBody: {
     fontSize: 14,
     color: SipatColors.textSecondary,
     textAlign: 'center',
-    marginTop: 8,
+    marginTop: SipatSpacing.sm,
     paddingHorizontal: 40,
   },
 });

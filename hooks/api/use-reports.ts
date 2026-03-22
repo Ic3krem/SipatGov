@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { fetchReports, createReport, upvoteReport } from '@/services/api';
+import { MOCK_REPORTS } from '@/utils/mock-data';
 import type { CommunityReport } from '@/types/models';
 import type { CreateReportInput, ReportsFilterParams } from '@/types/api';
 import { queryKeys } from './query-keys';
@@ -11,13 +12,26 @@ interface ReportsMutationContext {
 
 /**
  * Fetch community reports with optional filters.
+ * Falls back to mock data on error.
  */
 export function useReports(params?: ReportsFilterParams) {
   return useQuery<CommunityReport[]>({
     queryKey: queryKeys.reports.list(
       params ? { type: params.report_type } : undefined,
     ),
-    queryFn: () => fetchReports(params),
+    queryFn: async () => {
+      try {
+        return await fetchReports(params);
+      } catch {
+        console.warn('API unavailable for reports, using mock data');
+        const reports = MOCK_REPORTS;
+        if (params?.report_type) {
+          return reports.filter((r) => r.report_type === params.report_type);
+        }
+        return reports;
+      }
+    },
+    placeholderData: (previousData) => previousData ?? MOCK_REPORTS,
     staleTime: 5 * 60 * 1000,
   });
 }

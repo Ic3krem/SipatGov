@@ -25,6 +25,7 @@ DOWNLOADER_MIDDLEWARES = {
 
 ITEM_PIPELINES = {
     "governance_ghost.pipelines.DuplicateFilterPipeline": 100,
+    "governance_ghost.pipelines.ValidationPipeline": 150,
     "governance_ghost.pipelines.PDFDownloadPipeline": 200,
     "governance_ghost.pipelines.DatabasePipeline": 300,
     "governance_ghost.pipelines.ProcessingQueuePipeline": 400,

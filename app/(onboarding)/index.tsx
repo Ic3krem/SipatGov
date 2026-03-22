@@ -12,7 +12,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { DotIndicator } from '@/components/onboarding/DotIndicator';
 import { OnboardingCard } from '@/components/onboarding/OnboardingCard';
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing, SipatRadius } from '@/constants/theme';
 import { useLanguage } from '@/hooks/use-language';
 import { setOnboardingCompleted } from '@/utils/storage';
 
@@ -132,25 +132,27 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '45%',
     zIndex: 10,
-    padding: 4,
+    padding: SipatSpacing.xs,
   },
   chevronLeft: {
-    left: 8,
+    left: SipatSpacing.sm,
   },
   chevronRight: {
-    right: 8,
+    right: SipatSpacing.sm,
   },
   controls: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 24,
+    paddingHorizontal: SipatSpacing.xxl,
     paddingBottom: 40,
-    paddingTop: 16,
+    paddingTop: SipatSpacing.lg,
     backgroundColor: '#FFFFFF',
   },
   skipButton: {
-    padding: 8,
+    height: 48,
+    justifyContent: 'center',
+    paddingHorizontal: SipatSpacing.sm,
     minWidth: 80,
   },
   skipText: {
@@ -158,20 +160,21 @@ const styles = StyleSheet.create({
     color: SipatColors.textSecondary,
   },
   nextButton: {
-    padding: 8,
+    height: 48,
+    justifyContent: 'center',
+    paddingHorizontal: SipatSpacing.sm,
     minWidth: 80,
     alignItems: 'flex-end',
   },
   nextText: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: '600',
     color: SipatColors.gold,
   },
   getStartedButton: {
     backgroundColor: SipatColors.gold,
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 8,
+    paddingHorizontal: SipatSpacing.xxl,
+    borderRadius: SipatRadius.pill,
     alignItems: 'center',
     shadowColor: SipatColors.gold,
     shadowOffset: { width: 0, height: 3 },

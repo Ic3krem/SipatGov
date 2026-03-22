@@ -48,3 +48,26 @@ class BudgetItem(scrapy.Item):
     source_url = scrapy.Field()
     source_document_url = scrapy.Field()
     crawled_at = scrapy.Field()
+
+
+class AuditReportItem(scrapy.Item):
+    """COA audit report for LGUs."""
+    lgu_name = scrapy.Field()
+    audit_year = scrapy.Field()
+    title = scrapy.Field()
+    findings_summary = scrapy.Field()
+    total_disallowances = scrapy.Field()
+    pdf_urls = scrapy.Field()
+    source_url = scrapy.Field()
+    crawled_at = scrapy.Field()
+
+
+class FOIRequestItem(scrapy.Item):
+    """e-FOI portal request/disclosure record."""
+    agency_name = scrapy.Field()
+    request_type = scrapy.Field()
+    status = scrapy.Field()
+    processing_days = scrapy.Field()
+    disclosed_documents = scrapy.Field()
+    source_url = scrapy.Field()
+    crawled_at = scrapy.Field()

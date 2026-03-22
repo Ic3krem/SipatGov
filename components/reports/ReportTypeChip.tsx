@@ -49,14 +49,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     paddingVertical: 5,
-    borderRadius: 12,
+    borderRadius: 20,
     gap: 4,
     alignSelf: 'flex-start',
   },
   chipCompact: {
     paddingHorizontal: 8,
     paddingVertical: 3,
-    borderRadius: 10,
+    borderRadius: 14,
     gap: 3,
   },
   label: {

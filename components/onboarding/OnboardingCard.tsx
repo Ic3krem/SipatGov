@@ -2,7 +2,7 @@ import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Svg, { Defs, LinearGradient, Stop, Path } from 'react-native-svg';
 
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatTypography } from '@/constants/theme';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -141,24 +141,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 36,
   },
   title: {
-    fontSize: 20,
-    fontWeight: '400',
-    color: SipatColors.textPrimary,
+    ...SipatTypography.h1,
+    color: SipatColors.navyLight,
     textAlign: 'center',
     letterSpacing: 0.5,
   },
   subtitle: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: SipatColors.navyLight,
+    fontSize: 16,
+    fontWeight: '400',
+    color: SipatColors.textPrimary,
     textAlign: 'center',
-    marginTop: 4,
+    marginTop: 6,
+    lineHeight: 22,
   },
   body: {
-    fontSize: 15,
+    ...SipatTypography.body,
     color: SipatColors.textSecondary,
     textAlign: 'center',
     marginTop: 16,
-    lineHeight: 22,
   },
 });

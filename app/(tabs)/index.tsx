@@ -6,7 +6,7 @@ import { CTAButton } from '@/components/dashboard/CTAButton';
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader';
 import { QuickStats } from '@/components/dashboard/QuickStats';
 import { SafeMapView, type MapMarkerData } from '@/components/map/SafeMapView';
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing } from '@/constants/theme';
 import { useLGUMapMarkers, usePromiseStats } from '@/hooks/api';
 import { useLanguage } from '@/hooks/use-language';
 import { useMapStore } from '@/store/map-store';
@@ -114,10 +114,11 @@ const styles = StyleSheet.create({
   },
   bottomPanel: {
     backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    paddingTop: 20,
-    paddingBottom: 12,
+    borderTopLeftRadius: SipatSpacing.xl,
+    borderTopRightRadius: SipatSpacing.xl,
+    paddingTop: SipatSpacing.xl,
+    paddingBottom: SipatSpacing.lg,
+    gap: SipatSpacing.lg,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   statsLoading: {
-    paddingVertical: 20,
+    paddingVertical: SipatSpacing.xl,
     alignItems: 'center',
   },
 });

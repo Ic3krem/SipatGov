@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing, SipatRadius } from '@/constants/theme';
 
 interface PromiseSummaryCardProps {
   label: string;
@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 16,
-    gap: 12,
+    borderRadius: SipatRadius.md,
+    padding: SipatSpacing.md,
+    gap: SipatSpacing.md,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,

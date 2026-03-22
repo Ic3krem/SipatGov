@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 
-import { SipatColors } from '@/constants/theme';
+import { SipatColors, SipatSpacing } from '@/constants/theme';
 
 interface DotIndicatorProps {
   total: number;
@@ -26,7 +26,7 @@ export function DotIndicator({ total, current }: DotIndicatorProps) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    gap: 8,
+    gap: SipatSpacing.sm,
     justifyContent: 'center',
     alignItems: 'center',
   },

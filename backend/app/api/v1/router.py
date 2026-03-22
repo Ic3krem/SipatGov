@@ -11,6 +11,7 @@ from app.api.v1.endpoints import (
     promises,
     regions,
     reports,
+    scheduler,
     search,
 )
 
@@ -27,3 +28,4 @@ api_v1_router.include_router(documents.router, prefix="/documents", tags=["Docum
 api_v1_router.include_router(dashboard.router, prefix="/dashboard", tags=["Dashboard"])
 api_v1_router.include_router(search.router, prefix="/search", tags=["Search"])
 api_v1_router.include_router(crawler.router, prefix="/crawler", tags=["Crawler"])
+api_v1_router.include_router(scheduler.router, prefix="/scheduler", tags=["Scheduler"])
