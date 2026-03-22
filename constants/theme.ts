@@ -1,41 +1,108 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
-
 import { Platform } from 'react-native';
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+/**
+ * SipatGov Brand Color System
+ * ────────────────────────────
+ * Derived from the shield logo palette:
+ *   • Navy/Purple  — shield body, dark backgrounds
+ *   • Red (#CE1126) — PH flag red, central figure
+ *   • Blue (#0038A8) — PH flag blue, eye arc
+ *   • Gold (#D4A843) — border accents, CTAs, highlights
+ */
+export const SipatColors = {
+  // ── Brand (from logo) ─────────────────────────────
+  navy: '#0A0E1A',          // deepest — splash/onboarding bg
+  navyLight: '#1B2A5B',     // shield body upper
+  navyMid: '#141832',       // cards on dark bg
+  purple: '#2D1B4E',        // glow/ambient light
+  red: '#CE1126',           // PH flag red / shield figure
+  redLight: '#E8384F',      // lighter red for accents
+  blue: '#0038A8',          // PH flag blue / eye arc
+  blueLight: '#1E6FD9',     // interactive blue
+  gold: '#D4A843',          // primary accent / CTAs
+  goldLight: '#E8C96A',     // hover/highlight gold
+  goldPale: '#FFF3CD',      // very light gold for badges
+
+  // Aliases for backward compat — now navy instead of green
+  primary: '#0A0E1A',
+  primaryLight: '#1B2A5B',
+  primaryDark: '#060810',
+  accent: '#D4A843',
+  accentLight: '#E8C96A',
+
+  // ── Promise status ────────────────────────────────
+  kept: '#2ECC71',
+  broken: '#E74C3C',
+  pending: '#F39C12',
+  inProgress: '#3498DB',
+  delayed: '#E67E22',
+  partiallyKept: '#F1C40F',
+  unverifiable: '#95A5A6',
+
+  // ── Project status ────────────────────────────────
+  planned: '#9B59B6',
+  bidding: '#3498DB',
+  awarded: '#2ECC71',
+  ongoing: '#1ABC9C',
+  completed: '#27AE60',
+  cancelled: '#E74C3C',
+  suspended: '#E67E22',
+
+  // ── Onboarding (dark theme) ───────────────────────
+  onboardingBg: '#0A0E1A',
+  onboardingText: '#FFFFFF',
+  onboardingAccent: '#D4A843',
+  onboardingSubtext: '#8892A0',
+
+  // ── Dashboard (light theme) ───────────────────────
+  dashboardBg: '#F5F7FA',
+  cardBg: '#FFFFFF',
+  cardBorder: '#E8ECF1',
+  sectionTitle: '#1B2A5B',    // navy instead of generic dark
+
+  // ── Text hierarchy ────────────────────────────────
+  textPrimary: '#0A0E1A',     // navy — ties text to brand
+  textSecondary: '#5A6678',
+  textMuted: '#9AA3B0',
+
+  // ── Utility ───────────────────────────────────────
+  success: '#2ECC71',
+  warning: '#F39C12',
+  error: '#E74C3C',
+  info: '#1E6FD9',
+} as const;
+
+const tintColorLight = SipatColors.gold;
+const tintColorDark = '#FFFFFF';
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
+    text: SipatColors.textPrimary,
+    background: SipatColors.dashboardBg,
     tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    icon: '#5A6678',
+    tabIconDefault: '#8892A0',
+    tabIconSelected: SipatColors.navy,
+    card: SipatColors.cardBg,
+    cardBorder: SipatColors.cardBorder,
   },
   dark: {
     text: '#ECEDEE',
-    background: '#151718',
+    background: SipatColors.navy,
     tint: tintColorDark,
     icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    tabIconDefault: '#5A6678',
+    tabIconSelected: SipatColors.gold,
+    card: SipatColors.navyMid,
+    cardBorder: '#1E2040',
   },
 };
 
 export const Fonts = Platform.select({
   ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
     sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
     serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
     rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
     mono: 'ui-monospace',
   },
   default: {

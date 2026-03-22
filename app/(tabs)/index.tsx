@@ -1,98 +1,131 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { useCallback, useMemo } from 'react';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { CTAButton } from '@/components/dashboard/CTAButton';
+import { DashboardHeader } from '@/components/dashboard/DashboardHeader';
+import { QuickStats } from '@/components/dashboard/QuickStats';
+import { SafeMapView, type MapMarkerData } from '@/components/map/SafeMapView';
+import { SipatColors } from '@/constants/theme';
+import { useLGUMapMarkers, usePromiseStats } from '@/hooks/api';
+import { useLanguage } from '@/hooks/use-language';
+import { useMapStore } from '@/store/map-store';
 
-export default function HomeScreen() {
+// Philippines center coordinates
+const PH_REGION = {
+  latitude: 12.8797,
+  longitude: 121.774,
+  latitudeDelta: 12,
+  longitudeDelta: 8,
+};
+
+export default function DashboardScreen() {
+  const { t } = useLanguage();
+  const { setSelectedMarker } = useMapStore();
+
+  // Fetch map markers and promise stats from the API (falls back to mock data)
+  const { data: markers = [], isLoading: markersLoading } = useLGUMapMarkers();
+  const { data: stats, isLoading: statsLoading } = usePromiseStats();
+
+  const total = stats?.total ?? 0;
+
+  const handleMarkerPress = useCallback(
+    (id: number) => setSelectedMarker(id),
+    [setSelectedMarker],
+  );
+
+  const handleMapPress = useCallback(
+    () => setSelectedMarker(null),
+    [setSelectedMarker],
+  );
+
+  // Transform LGU markers -> SafeMapView format (memoized)
+  const mapMarkers: MapMarkerData[] = useMemo(
+    () =>
+      markers.map((m) => ({
+        id: m.id,
+        coordinate: { latitude: m.lat, longitude: m.lng },
+        name: m.name,
+        score: m.score,
+        onPress: () => handleMarkerPress(m.id),
+      })),
+    [markers, handleMarkerPress],
+  );
+
+  const isInitialLoading = markersLoading && markers.length === 0;
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <SafeAreaView style={styles.container} edges={['top']}>
+      <DashboardHeader />
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      <View style={styles.mapContainer}>
+        {isInitialLoading ? (
+          <View style={styles.loadingOverlay}>
+            <ActivityIndicator size="large" color={SipatColors.gold} />
+          </View>
+        ) : null}
+        <SafeMapView
+          style={styles.map}
+          initialRegion={PH_REGION}
+          markers={mapMarkers}
+          onPress={handleMapPress}
+        />
+      </View>
+
+      <View style={styles.bottomPanel}>
+        <CTAButton text={t.dashboard.cta} />
+
+        {statsLoading && !stats ? (
+          <View style={styles.statsLoading}>
+            <ActivityIndicator size="small" color={SipatColors.gold} />
+          </View>
+        ) : stats ? (
+          <QuickStats
+            stats={[
+              { label: t.dashboard.promisesKept, value: stats.counts.kept, total, color: SipatColors.kept },
+              { label: t.dashboard.promisesBroken, value: stats.counts.broken, total, color: SipatColors.broken },
+              { label: t.dashboard.promisesPending, value: stats.counts.pending, total, color: SipatColors.pending },
+              { label: t.dashboard.promisesInProgress, value: stats.counts.in_progress, total, color: SipatColors.inProgress },
+            ]}
+          />
+        ) : null}
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    flex: 1,
+    backgroundColor: SipatColors.dashboardBg,
+  },
+  mapContainer: {
+    flex: 1,
+  },
+  map: {
+    flex: 1,
+  },
+  loadingOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 1,
     alignItems: 'center',
-    gap: 8,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.6)',
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  bottomPanel: {
+    backgroundColor: '#FFFFFF',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingTop: 20,
+    paddingBottom: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  statsLoading: {
+    paddingVertical: 20,
+    alignItems: 'center',
   },
 });

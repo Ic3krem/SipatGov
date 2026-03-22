@@ -1,0 +1,13 @@
+[project]
+name = "governance-ghost"
+version = "0.1.0"
+description = "AI Auditing Engine for SipatGov - crawls Philippine government portals and extracts structured data"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
