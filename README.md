@@ -2,8 +2,125 @@
 
 **Civic-tech transparency platform for tracking Philippine LGU budgets, promises, and project implementations.**
 
-> *"Taon-taon tayong nabibigo sa mga pangakong nabibitawan tuwing eleksyon."*
+> *"Taon-taon tayong nabibigo sa mga pangakong nabibitawan tuwing eleksyon.*
+> *Di natin alam kung may nangyari nga ba, o kung naka-post man, hindi naman naiintindihan."*
+>
 > SipatGov exists to change that.
+
+---
+
+## Project Description
+
+### What is SipatGov?
+
+**SipatGov** (from the Filipino word *sipat* — to observe, to check, to scrutinize) is a civic-technology platform that empowers Filipino citizens to hold their Local Government Units (LGUs) accountable. It is a complete system that autonomously collects, processes, and presents government data in a way that ordinary citizens can understand and act upon.
+
+The platform addresses a fundamental problem in Philippine governance: **the gap between what officials promise and what they deliver**. Every election cycle, candidates make commitments — infrastructure projects, budget allocations, social programs. But once elected, there is no accessible, centralized system for citizens to track whether those promises were kept, how public funds were spent, or whether projects were actually completed.
+
+### The Problem
+
+1. **Inaccessible Data** — Government procurement records (PhilGEPS), budget documents (DBM), audit reports (COA), and FOI disclosures are scattered across multiple portals, buried in PDFs, and written in bureaucratic language.
+
+2. **No Accountability Tracking** — There is no system that cross-references campaign promises against actual budget allocations, awarded contracts, and completed projects.
+
+3. **Citizen Disengagement** — Without understandable data, citizens cannot meaningfully participate in governance oversight, leading to a cycle of broken promises and voter frustration.
+
+4. **Manual Monitoring is Impossible** — A single LGU might publish hundreds of procurement notices, budget documents, and project updates per year. No citizen or watchdog group can manually track all of this.
+
+### The Solution
+
+SipatGov solves this through two integrated systems:
+
+#### GovernanceGhost (The AI Auditing Engine)
+
+An autonomous backend service that operates 24/7 to:
+
+- **Crawl** four major government portals (PhilGEPS, DBM, COA, e-FOI) on configurable schedules
+- **Extract** text from scanned PDFs using AWS Textract OCR
+- **Understand** unstructured government documents using Claude AI, converting them into structured data (budget amounts, contractor names, project timelines, audit findings)
+- **Validate** extracted data using a 21-rule validation pipeline with Jaccard similarity deduplication and AI verification for ambiguous cases
+- **Store** everything in a normalized PostgreSQL database with Row-Level Security
+
+The system requires zero human intervention once configured. It discovers new documents, downloads PDFs, extracts structured data, validates quality, and stores results — all autonomously.
+
+#### SipatGov App (The Citizen Interface)
+
+A mobile application (Android) that presents government data in an accessible, visual format:
+
+- **Interactive Map** — OpenStreetMap-based visualization of LGU projects and budget allocations by region, with color-coded transparency scores
+- **Promise Tracker** — Every official's campaign commitments tracked against actual delivery, with evidence links to source documents (Kept / Broken / In Progress / Pending)
+- **Project Monitor** — Real-time status of infrastructure and government projects with budget utilization, contractor info, and timeline tracking
+- **Community Reports** — Citizens can submit concerns, corruption tips, progress updates, and delay reports with upvoting to surface the most important issues
+- **Accountability Dashboard** — Per-LGU and per-official scorecards with historical trends
+
+The app supports **English and Tagalog**, works **offline** with cached data, and gracefully degrades when the backend is unreachable by falling back to locally stored mock/cached data.
+
+### Who is it for?
+
+| User | Use Case |
+|------|----------|
+| **Citizens** | Check if their LGU is keeping promises, report concerns, view how taxes are spent |
+| **Journalists** | Access structured government data for investigative reporting |
+| **Civil Society / NGOs** | Monitor LGU compliance, track budget utilization across regions |
+| **Researchers** | Analyze governance patterns, procurement trends, audit findings |
+| **Government Watchdogs** | Cross-reference promises vs. actual spending vs. audit results |
+
+### Key Features
+
+| Feature | Description |
+|---------|-------------|
+| **Autonomous Data Collection** | 4 spiders crawl PhilGEPS, DBM, COA, e-FOI on scheduled intervals |
+| **AI-Powered Extraction** | Claude API converts messy government PDFs into structured, searchable data |
+| **ML Validation Pipeline** | 21 rule-based checks + AI verification ensure data quality (auto-approve > 0.8, flag 0.3-0.8, reject < 0.3) |
+| **Promise Accountability** | Campaign commitments tracked with evidence linking to source documents |
+| **Transparency Scoring** | Each LGU gets a computed transparency score based on data availability, promise fulfillment, and audit results |
+| **Community Reporting** | Citizens can file reports with upvoting to surface critical issues |
+| **Bilingual Support** | Full English and Tagalog translations (100+ keys) |
+| **Offline-First Design** | React Query persistence + AsyncStorage ensures the app works without connectivity |
+| **Open Data** | All government data is public record — the platform just makes it accessible |
+
+### Data Pipeline
+
+```
+Government Portals          AI Processing           Citizen App
+─────────────────          ──────────────           ───────────
+PhilGEPS (bids) ─┐                                 ┌─ Dashboard
+DBM (budgets) ───┤  Scrapy    Textract   Claude    ├─ Promise Tracker
+COA (audits) ────┼──────►──────►────────►──────►───├─ Project Monitor
+e-FOI (FOI) ─────┘  Crawl     OCR       NLP       ├─ Community Reports
+                     │         │         │         └─ Accountability
+                     ▼         ▼         ▼
+              Validation Pipeline (21 rules)
+                     │
+                     ▼
+              PostgreSQL (Supabase)
+              14 tables, RLS, materialized views
+```
+
+### Design Philosophy
+
+The app's visual identity draws from the **Philippine flag colors** — navy blue, red, and gold — embodied in the SipatGov shield emblem (an eye within a shield, symbolizing vigilant civic observation). The design transitions from a **dark, bold onboarding flow** (establishing the app's serious civic purpose) to a **clean, light dashboard** (prioritizing data readability and accessibility).
+
+The taglines reflect the app's mission:
+- *"Buksan ang mga mata"* — Open your eyes
+- *"Maging Mapagmasid"* — Be observant
+- *"Ipaglaban ang Tama"* — Fight for what's right
+- *"Sipatin ang Gobyerno"* — Scrutinize the government
+
+### Project Status
+
+This is an actively developed civic-tech project. Current implementation includes:
+
+- ✅ Full mobile app with 5 screens (Dashboard, Sipat, Projects, Reports, Profile)
+- ✅ Multi-step onboarding flow with bilingual support
+- ✅ 4 autonomous web spiders targeting major PH government portals
+- ✅ PDF processing pipeline (OCR + NLP) with mock mode for development
+- ✅ Data validation pipeline with AI verification
+- ✅ Auto-scheduling system for crawl jobs
+- ✅ 14-table PostgreSQL schema with RLS and materialized views
+- ✅ 12 REST API endpoints with input validation and error handling
+- ✅ React Query integration with offline-first data persistence
+- ✅ Design system (typography, spacing, colors) aligned with Philippine flag identity
 
 ---
 
